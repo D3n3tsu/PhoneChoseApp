@@ -1,0 +1,19 @@
+﻿@using PhoneCoseApp.Entities
+@model Phone
+
+<div>
+    @using (Html.BeginForm())
+    { 
+    <div>
+        @Html.LabelFor(m => m.Name)
+        @Html.TextBoxFor(m => m.Name)
+    </div>
+    <div>
+        @Html.LabelFor(m => m.Color)
+        @Html.DropDownListFor(m => m.Color, Html.GetEnumSelectList(typeof(Colors)))
+    </div>
+    <div>
+        <input type="submit" value="Create" />
+    </div>
+    }
+</div>
