@@ -9,6 +9,7 @@ namespace PhoneCoseApp.Services
     public interface IPhonesData
     {
         IEnumerable<Phone> GetAllPhones();
+        object GetPhoneById(int id);
     }
 
     public class InMemoryPhonesData : IPhonesData
@@ -28,6 +29,11 @@ namespace PhoneCoseApp.Services
         public IEnumerable<Phone> GetAllPhones()
         {
             return _phones;
+        }
+
+        public object GetPhoneById(int id)
+        {
+            return _phones.FirstOrDefault(item => item.Id == id);
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿@model PhoneCoseApp.ViewModels.Home.IndexViewModel
+﻿@using PhoneCoseApp.Controllers
+@model PhoneCoseApp.ViewModels.Home.IndexViewModel
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -11,8 +12,13 @@
         @foreach (var phone in Model.Phones)
         {
             <div>
-                Phones Id: @phone.Id
-                Phones name: @phone.Name
+                <p>
+                    Phones Id: @phone.Id @Html.ActionLink("View",
+                                    nameof(HomeController.Details),
+                                    new { Id = phone.Id });
+                </p>
+                
+                <p>Phones name: @phone.Name</p>
             </div>
 
         }

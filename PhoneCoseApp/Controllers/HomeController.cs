@@ -29,5 +29,17 @@ namespace PhoneCoseApp.Controllers
 
             return View(testModel);
         }
+
+        public IActionResult Details(int Id)
+        {
+            var model = _phonesData.GetPhoneById(Id);
+
+            if (model == null)
+            {
+                return RedirectToAction(nameof(Index));
+            }
+
+            return View(model);
+        }
     }
 }
