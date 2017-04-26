@@ -1,15 +1,19 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Mvc;
+using PhoneCoseApp.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
 namespace PhoneCoseApp.Controllers
 {
-    public class HomeController
+    public class HomeController : Controller
     {
-        public string Index()
+        public IActionResult Index()
         {
-            return "ctrl";
+            var testModel = new Phone() { Id = 1, Name = "Nokla" };
+
+            return new ObjectResult(testModel);
         }
     }
 }
