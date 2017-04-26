@@ -13,7 +13,7 @@ namespace PhoneCoseApp.Controllers
         {
             var testModel = new Phone() { Id = 1, Name = "Nokla" };
 
-            return new ObjectResult(testModel);
+            return View(testModel);
         }
     }
 }
