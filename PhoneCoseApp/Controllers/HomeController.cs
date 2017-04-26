@@ -1,25 +1,31 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using PhoneCoseApp.Models;
 using PhoneCoseApp.Services;
+using PhoneCoseApp.ViewModels.Home;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using PhoneCoseApp.Entities;
 
 namespace PhoneCoseApp.Controllers
 {
     public class HomeController : Controller
     {
         private IPhonesData _phonesData;
+        private IDiscountChecker _discountChecker;
 
-        public HomeController(IPhonesData phonesData)
+        public HomeController(IPhonesData phonesData,IDiscountChecker discountChecker)
         {
             _phonesData = phonesData;
+            _discountChecker = discountChecker;
         }
 
         public IActionResult Index()
         {
-            var testModel = _phonesData.GetAllPhones();
+            var testModel = new IndexViewModel() {
+                Discount = _discountChecker.GetDiscount(),
+                Phones = _phonesData.GetAllPhones()
+            };
 
             return View(testModel);
         }
