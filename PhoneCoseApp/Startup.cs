@@ -57,7 +57,10 @@ namespace PhoneCoseApp
 
             app.UseFileServer();
 
-            app.UseMvc();
+            app.UseMvc(routProvider => routProvider.MapRoute("Default",
+                "{controller=home}/{action=index}/{id?}"));
+
+            app.Run(context => context.Response.WriteAsync("Route not found"));
         }
     }
 }
