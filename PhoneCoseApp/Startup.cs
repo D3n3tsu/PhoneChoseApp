@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Configuration;
+using PhoneCoseApp.Services;
 
 namespace PhoneCoseApp
 {
@@ -32,6 +33,7 @@ namespace PhoneCoseApp
             services.AddMvc();
             services.AddSingleton(Configuration);
             services.AddSingleton<IDiscountChecker, DiscountChecker>();
+            services.AddScoped<IPhonesData, InMemoryPhonesData>();
             
         }
 

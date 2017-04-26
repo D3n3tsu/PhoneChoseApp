@@ -1,4 +1,4 @@
-﻿@model PhoneCoseApp.Models.Phone
+﻿@model IEnumerable<PhoneCoseApp.Models.Phone>
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -6,6 +6,16 @@
 </head>
 <body>
     <h1>Here will be homepage</h1>
-    <div>Model name: @Model.Name</div>
+    <div>
+        @foreach (var phone in Model)
+        {
+            <div>
+                Phones Id: @phone.Id
+                Phones name: @phone.Name
+            </div>
+
+        }
+        
+    </div>
 </body>
 </html>
