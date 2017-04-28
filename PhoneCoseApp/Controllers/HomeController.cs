@@ -42,9 +42,24 @@ namespace PhoneCoseApp.Controllers
             return View(model);
         }
 
+        [HttpGet]
         public IActionResult Create()
         {
             return View();
+        }
+
+        [HttpPost]
+        public IActionResult Create(CreateViewModel createVM)
+        {
+            var newPhone = new Phone()
+            {
+                Name = createVM.Name,
+                Color = createVM.Color
+            };
+
+            newPhone = _phonesData.Add(newPhone);
+
+            return View("Details", newPhone);
         }
     }
 }

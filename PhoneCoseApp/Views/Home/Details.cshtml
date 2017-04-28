@@ -1,6 +1,14 @@
 ﻿@using PhoneCoseApp.Controllers
 @model PhoneCoseApp.Entities.Phone
 
-<h1>@Model.Name details</h1>
+<div>
+    <h1>@Model.Name details</h1>
+</div>
+<div>
+    @Model.Color
+</div>
+<div>
+    @Model.Id
+</div>
 
 @Html.ActionLink("Back", nameof(HomeController.Index))

@@ -10,13 +10,14 @@ namespace PhoneCoseApp.Services
     {
         IEnumerable<Phone> GetAllPhones();
         object GetPhoneById(int id);
+        Phone Add(Phone newPhone);
     }
 
     public class InMemoryPhonesData : IPhonesData
     {
-        private List<Phone> _phones;
+        private static List<Phone> _phones;
 
-        public InMemoryPhonesData()
+        static InMemoryPhonesData()
         {
             _phones = new List<Phone>()
             {
@@ -24,6 +25,13 @@ namespace PhoneCoseApp.Services
                 new Phone(){ Id=2, Name="Phone2"},
                 new Phone(){ Id=3, Name="Phone3"}
             };
+        }
+
+        public Phone Add(Phone newPhone)
+        {
+            newPhone.Id = _phones.Max(m => m.Id)+1;
+            _phones.Add(newPhone);
+            return newPhone;
         }
 
         public IEnumerable<Phone> GetAllPhones()
