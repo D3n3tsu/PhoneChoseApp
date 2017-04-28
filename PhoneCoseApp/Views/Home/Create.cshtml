@@ -2,15 +2,18 @@
 @model Phone
 
 <div>
+    @Html.ValidationSummary()
     @using (Html.BeginForm())
     { 
     <div>
         @Html.LabelFor(m => m.Name)
-        @Html.TextBoxFor(m => m.Name)
+        @Html.EditorFor(m => m.Name)
+        @Html.ValidationMessageFor(m=>m.Name)
     </div>
     <div>
         @Html.LabelFor(m => m.Color)
         @Html.DropDownListFor(m => m.Color, Html.GetEnumSelectList(typeof(Colors)))
+        @Html.ValidationMessageFor(m=>m.Color)
     </div>
     <div>
         <input type="submit" value="Create" />

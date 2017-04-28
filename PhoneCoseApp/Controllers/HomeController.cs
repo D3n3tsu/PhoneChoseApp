@@ -14,7 +14,7 @@ namespace PhoneCoseApp.Controllers
         private IPhonesData _phonesData;
         private IDiscountChecker _discountChecker;
 
-        public HomeController(IPhonesData phonesData,IDiscountChecker discountChecker)
+        public HomeController(IPhonesData phonesData, IDiscountChecker discountChecker)
         {
             _phonesData = phonesData;
             _discountChecker = discountChecker;
@@ -22,7 +22,8 @@ namespace PhoneCoseApp.Controllers
 
         public IActionResult Index()
         {
-            var testModel = new IndexViewModel() {
+            var testModel = new IndexViewModel()
+            {
                 Discount = _discountChecker.GetDiscount(),
                 Phones = _phonesData.GetAllPhones()
             };
@@ -49,17 +50,22 @@ namespace PhoneCoseApp.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public IActionResult Create(CreateViewModel createVM)
         {
-            var newPhone = new Phone()
+            if (ModelState.IsValid)
             {
-                Name = createVM.Name,
-                Color = createVM.Color
-            };
+                var newPhone = new Phone()
+                {
+                    Name = createVM.Name,
+                    Color = createVM.Color
+                };
 
-            newPhone = _phonesData.Add(newPhone);
+                newPhone = _phonesData.Add(newPhone);
 
-            return View("Details", newPhone);
+                return RedirectToAction("Details", new { Id = newPhone.Id });
+            }
+            return View();
         }
     }
 }
