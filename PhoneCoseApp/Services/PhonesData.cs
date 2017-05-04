@@ -13,6 +13,33 @@ namespace PhoneCoseApp.Services
         Phone Add(Phone newPhone);
     }
 
+    public class SqlPhonesData : IPhonesData
+    {
+        private PhoneCoseAppDbContext _context;
+
+        public SqlPhonesData(PhoneCoseAppDbContext context)
+        {
+            _context = context;
+        }
+
+        public Phone Add(Phone newPhone)
+        {
+            _context.Add(newPhone);
+            _context.SaveChanges();
+            return newPhone;
+        }
+
+        public IEnumerable<Phone> GetAllPhones()
+        {
+            return _context.Phones;
+        }
+
+        public object GetPhoneById(int id)
+        {
+            return _context.Phones.FirstOrDefault(r => r.Id == id);
+        }
+    }
+
     public class InMemoryPhonesData : IPhonesData
     {
         private static List<Phone> _phones;
