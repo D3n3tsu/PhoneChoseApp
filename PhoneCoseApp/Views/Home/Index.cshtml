@@ -1,13 +1,14 @@
 ﻿@using PhoneCoseApp.Controllers
 @model PhoneCoseApp.ViewModels.Home.IndexViewModel
 
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head>
-    <title></title>
-</head>
-<body>
+@{ 
+    ViewBag.Title = "Home";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div>
     <h1>Here will be homepage</h1>
-    <h3>Todays discount on: @Model.Discount</h3>
+    
     <div>
         @foreach (var phone in Model.Phones)
         {
@@ -17,12 +18,15 @@
                                     nameof(HomeController.Details),
                                     new { Id = phone.Id });
                 </p>
-                
+
                 <p>Phones name: @phone.Name</p>
             </div>
 
         }
-        
+
     </div>
-</body>
-</html>
+</div>
+
+@section footer{
+    <h3>Todays discount on: @Model.Discount</h3>
+}
