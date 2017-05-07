@@ -9,6 +9,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Configuration;
 using PhoneCoseApp.Services;
+using PhoneCoseApp.Entities;
+using Microsoft.EntityFrameworkCore;
 
 namespace PhoneCoseApp
 {
@@ -33,8 +35,9 @@ namespace PhoneCoseApp
             services.AddMvc();
             services.AddSingleton(Configuration);
             services.AddSingleton<IDiscountChecker, DiscountChecker>();
-            services.AddScoped<IPhonesData, InMemoryPhonesData>();
-            
+            services.AddScoped<IPhonesData, SqlPhonesData>();
+            services.AddDbContext<PhoneCoseAppDbContext>(options => 
+                        options.UseSqlServer(Configuration.GetConnectionString("PhoneCoseApp")));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
