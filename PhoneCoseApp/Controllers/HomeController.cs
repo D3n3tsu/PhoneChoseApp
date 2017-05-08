@@ -6,9 +6,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using PhoneCoseApp.Entities;
+using Microsoft.AspNetCore.Authorization;
 
 namespace PhoneCoseApp.Controllers
 {
+    [Authorize]
     public class HomeController : Controller
     {
         private IPhonesData _phonesData;
@@ -20,6 +22,7 @@ namespace PhoneCoseApp.Controllers
             _discountChecker = discountChecker;
         }
 
+        [AllowAnonymous]
         public IActionResult Index()
         {
             var testModel = new IndexViewModel()

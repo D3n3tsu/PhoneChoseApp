@@ -8,9 +8,10 @@ using PhoneCoseApp.Entities;
 namespace PhoneCoseApp.Migrations
 {
     [DbContext(typeof(PhoneCoseAppDbContext))]
-    partial class PhoneCoseAppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20170508205506_Identity")]
+    partial class Identity
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
             modelBuilder
                 .HasAnnotation("ProductVersion", "1.1.1")

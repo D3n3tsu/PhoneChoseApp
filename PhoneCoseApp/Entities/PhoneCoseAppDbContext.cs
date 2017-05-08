@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -6,11 +7,11 @@ using System.Threading.Tasks;
 
 namespace PhoneCoseApp.Entities
 {
-    public class PhoneCoseAppDbContext : DbContext
+    public class PhoneCoseAppDbContext : IdentityDbContext<User>
     {
         public PhoneCoseAppDbContext(DbContextOptions options) : base(options)
         {
-
+            
         }
 
         public DbSet<Phone> Phones { get; set; }

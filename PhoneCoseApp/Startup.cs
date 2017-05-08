@@ -11,6 +11,7 @@ using Microsoft.Extensions.Configuration;
 using PhoneCoseApp.Services;
 using PhoneCoseApp.Entities;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 
 namespace PhoneCoseApp
 {
@@ -38,6 +39,8 @@ namespace PhoneCoseApp
             services.AddScoped<IPhonesData, SqlPhonesData>();
             services.AddDbContext<PhoneCoseAppDbContext>(options => 
                         options.UseSqlServer(Configuration.GetConnectionString("PhoneCoseApp")));
+            services.AddIdentity<User, IdentityRole>().
+                AddEntityFrameworkStores<PhoneCoseAppDbContext>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -59,8 +62,9 @@ namespace PhoneCoseApp
                 });
             }
 
-
             app.UseFileServer();
+
+            app.UseIdentity();
 
             app.UseMvc(routProvider => routProvider.MapRoute("Default",
                 "{controller=home}/{action=index}/{id?}"));
