@@ -8,7 +8,6 @@ namespace PhoneCoseApp.ViewModels.Home
 {
     public class IndexViewModel
     {
-        public string Discount { get; set; }
         public IEnumerable<Phone> Phones { get; set; }
     }
 }

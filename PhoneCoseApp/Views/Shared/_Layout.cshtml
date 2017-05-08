@@ -11,6 +11,7 @@
     </div>
     <footer>
         @RenderSection("footer",required: false)
+        @await Component.InvokeAsync("Discount")
     </footer>
 </body>
 </html>

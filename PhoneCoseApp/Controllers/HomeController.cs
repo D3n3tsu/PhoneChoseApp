@@ -24,7 +24,6 @@ namespace PhoneCoseApp.Controllers
         {
             var testModel = new IndexViewModel()
             {
-                Discount = _discountChecker.GetDiscount(),
                 Phones = _phonesData.GetAllPhones()
             };
 
