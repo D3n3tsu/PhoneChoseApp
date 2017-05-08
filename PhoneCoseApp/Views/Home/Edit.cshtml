@@ -1,0 +1,26 @@
+﻿
+@model Phone
+
+@{
+    ViewBag.Title = "Edit - " + Model.Name;
+}
+
+<div>
+    <h3>Editing: @Model.Name</h3>
+    <form method="post" asp-antiforgery="true">
+        <div>
+            <label asp-for="Name"></label>
+            <input asp-for="Name" />
+            <span asp-validation-for="Name"></span>
+        </div>
+        <div>
+            <label asp-for="Color"></label>
+            <select asp-for="Color" asp-items="@Html.GetEnumSelectList(typeof(Colors))"></select>
+            <span asp-validation-for="Color"></span>
+        </div>
+        <div>
+            <input type="submit" value="Submit" />
+        </div>
+    </form>
+    
+</div>

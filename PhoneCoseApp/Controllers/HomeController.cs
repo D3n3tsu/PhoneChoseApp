@@ -44,6 +44,32 @@ namespace PhoneCoseApp.Controllers
         }
 
         [HttpGet]
+        public IActionResult Edit(int id)
+        {
+            var model = _phonesData.GetPhoneById(id);
+            if (model == null)
+            {
+                return RedirectToAction(nameof(Index));
+            }
+            return View(model);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Edit(int id, CreateViewModel vm)
+        {
+            Phone phone = _phonesData.GetPhoneById(id);
+            if (ModelState.IsValid)
+            {
+                phone.Name = vm.Name;
+                phone.Color = vm.Color;
+                _phonesData.Commit();
+                return RedirectToAction(nameof(Details), new { id = phone.Id });
+            }
+            return View(phone);
+        }
+
+        [HttpGet]
         public IActionResult Create()
         {
             return View();
@@ -62,6 +88,7 @@ namespace PhoneCoseApp.Controllers
                 };
 
                 newPhone = _phonesData.Add(newPhone);
+                _phonesData.Commit();
 
                 return RedirectToAction("Details", new { Id = newPhone.Id });
             }

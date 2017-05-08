@@ -13,17 +13,16 @@
         {
             <div>
                 <p>
-                    Phones Id: @phone.Id @Html.ActionLink("View",
-                                    nameof(HomeController.Details),
-                                    new { Id = phone.Id });
+                    <a asp-controller="Home" asp-action="Details" asp-route-Id="@phone.Id">Details</a>
+
+                    Phones name: @phone.Name
+
+                    <a asp-controller="Home" asp-action="Edit" asp-route-Id="@phone.Id">Edit</a>
                 </p>
-
-                <p>Phones name: @phone.Name</p>
             </div>
-
         }
-
     </div>
+    <a asp-controller="Home" asp-action="Create">Create</a>
 </div>
 
 @section footer{
