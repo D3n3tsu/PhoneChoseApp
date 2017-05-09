@@ -64,6 +64,8 @@ namespace PhoneCoseApp
 
             app.UseFileServer();
 
+            app.UseNodeModules(env.ContentRootPath);
+
             app.UseIdentity();
 
             app.UseMvc(routProvider => routProvider.MapRoute("Default",
