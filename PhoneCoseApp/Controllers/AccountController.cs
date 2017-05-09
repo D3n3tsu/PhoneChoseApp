@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using PhoneCoseApp.Entities;
 using PhoneCoseApp.ViewModels;
+using PhoneCoseApp.ViewModels.Account;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -47,5 +48,43 @@ namespace PhoneCoseApp.Controllers
             }
             return View();
         }
+
+        [HttpPost, ValidateAntiForgeryToken]
+        public async Task<IActionResult> Logout()
+        {
+            await _signInManager.SignOutAsync();
+            return RedirectToAction("Index", "Home");
+        }
+
+        [HttpGet]
+        public IActionResult Login()
+        {
+            return View();
+        }
+
+        [HttpPost, ValidateAntiForgeryToken]
+        public async Task<IActionResult> Login(LoginViewModel vm)
+        {
+            if (ModelState.IsValid)
+            {
+                var loginResult = await _signInManager.PasswordSignInAsync(vm.Username, 
+                                                        vm.Password, vm.RememberMe, false);
+                if (loginResult.Succeeded)
+                {
+                    if (Url.IsLocalUrl(vm.ReturnUrl))
+                    {
+                        return Redirect(vm.ReturnUrl);
+                    }
+                    else
+                    {
+                        return RedirectToAction("Index", "Home");
+                    }
+                }
+            }
+            ModelState.AddModelError("", "Could not login");
+            return View();
+        }
+
+
     }
 }
